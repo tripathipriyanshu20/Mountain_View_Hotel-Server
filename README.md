@@ -1,2 +1,2 @@
-# E-commerce-Platform
-Creating a E-commerce platform using Microservices, Docker Containers and Kubernetes 
+# Mountain_View_Hotel 
+Creating a Hotel Bookng Platform using Microservices, React js, Docker Containers and Kubernetes 
