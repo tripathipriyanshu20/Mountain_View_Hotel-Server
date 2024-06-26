@@ -2,4 +2,4 @@
 
 Creating a Hotel Bookng Platform using Microservices, React js, Docker Containers and Kubernetes.
 
-This is the Backend of this Project(Server side).
+This is the Backend of this Project (Server side).
