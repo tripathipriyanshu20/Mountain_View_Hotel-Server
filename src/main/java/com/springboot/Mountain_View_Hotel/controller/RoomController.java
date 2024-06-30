@@ -9,6 +9,7 @@ import com.springboot.Mountain_View_Hotel.service.BookingService;
 import com.springboot.Mountain_View_Hotel.service.IRoomService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +26,7 @@ import java.util.List;
 @RequestMapping("/rooms")
 public class RoomController {
     private IRoomService roomService;
-    private final BookingService bookingService;
+    private BookingService bookingService;
 
     @PostMapping("/add/new-room")
     public ResponseEntity<RoomResponse> addNewRoom(
@@ -39,11 +40,12 @@ public class RoomController {
         return ResponseEntity.ok(response);
     }
     @GetMapping("/room/types")
-
     public List<String> getRoomTypes(){
         return roomService.getAllRoomTypes();
 
     }
+
+    @GetMapping("/all-rooms")
     public ResponseEntity<List<RoomResponse>> getAllRooms() throws SQLException {
         List<Room> rooms= roomService.getAllRooms();
         List<RoomResponse> roomResponses = new ArrayList<>();
@@ -58,6 +60,12 @@ public class RoomController {
             }
         }
         return ResponseEntity.ok(roomResponses);
+    }
+
+    @DeleteMapping("/delete/room/{roomId}")
+    public ResponseEntity<Void> deleteRoom(@PathVariable Long roomId){
+        roomService.deleteRoom(roomId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     private RoomResponse getRoomResponse(Room room) {
@@ -76,7 +84,6 @@ public class RoomController {
 
             } catch (SQLException E){
                 throw new PhotoRetrievalException("Error retrieving photo");
-
             }
         }
         return new RoomResponse(room.getId(),room.getRoomType(),room.getRoomPrice(), room.isBooked(),photoBytes, bookingInfo);
