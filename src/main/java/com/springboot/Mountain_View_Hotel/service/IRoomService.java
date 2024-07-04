@@ -1,5 +1,6 @@
 package com.springboot.Mountain_View_Hotel.service;
 
+import com.springboot.Mountain_View_Hotel.exception.InternalServerException;
 import com.springboot.Mountain_View_Hotel.model.Room;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,5 +22,5 @@ public interface IRoomService {
 
 
 
-    Room updateRoom(Long roomId, String roomTypes, BigDecimal roomPrice, byte[] photoBytes);
+    Room updateRoom(Long roomId, String roomTypes, BigDecimal roomPrice, byte[] photoBytes) throws InternalServerException;
 }

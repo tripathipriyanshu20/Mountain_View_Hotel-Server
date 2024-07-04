@@ -1,5 +1,6 @@
 package com.springboot.Mountain_View_Hotel.controller;
 
+import com.springboot.Mountain_View_Hotel.exception.InternalServerException;
 import com.springboot.Mountain_View_Hotel.exception.PhotoRetrievalException;
 import com.springboot.Mountain_View_Hotel.model.BookedRoom;
 import com.springboot.Mountain_View_Hotel.model.Room;
@@ -74,7 +75,7 @@ public class RoomController {
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long roomId,
                                                    @RequestParam(required = false) String roomType,
                                                    @RequestParam(required = false) BigDecimal roomPrice,
-                                                   @RequestParam(required = false) MultipartFile photo) throws IOException, SQLException {
+                                                   @RequestParam(required = false) MultipartFile photo) throws IOException, SQLException, InternalServerException {
         byte[] photoBytes = photo != null && !photo.isEmpty()?
                 photo.getBytes() :roomService.getRoomPhotoByRoomId(roomId);
 
